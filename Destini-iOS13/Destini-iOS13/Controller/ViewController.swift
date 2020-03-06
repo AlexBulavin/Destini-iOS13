@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var storyLabel: UILabel!
     @IBOutlet weak var choice1Button: UIButton!
     @IBOutlet weak var choice2Button: UIButton!
+    
     var storyBrain = StoryBrain()
     
     override func viewDidLoad() {
@@ -22,10 +23,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func choiceMade(_ sender: UIButton) {
-        //storyBrain.nextStory(userChoice: sender.currentTitle!)
+        storyBrain.nextStory(userChoice: sender.currentTitle!)
         updateUI()
         
     }
+    
     
 //     @ objc func updateUI() {
 //        storyLabel.text = storyBrain.getStoryText()
@@ -35,8 +37,7 @@ class ViewController: UIViewController {
     
          @ objc func updateUI() {
         storyLabel.text = storyBrain.getStoryText()
-            let choice1 = storyBrain.getChoice1()
-            choice1Button.setTitle(choice1, for: .normal)
+        choice1Button.setTitle(storyBrain.getChoice1(), for: .normal)
         choice2Button.setTitle(storyBrain.getChoice2(), for: .normal)
     }
     

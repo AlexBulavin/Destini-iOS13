@@ -15,32 +15,37 @@ struct StoryBrain {
 //        Story(st: "You see a tiger.", ch: ["Shout for help.", "Play dead."]),
 //        Story(st: "You find a treasure chest.", ch: ["Open it.", "Check for traps."])]
     
-    
+    //0
      Story(
         st: "Your car has blown a tire on a winding road in the middle of nowhere with no cell phone reception. You decide to hitchhike. A rusty pickup truck rumbles to a stop next to you. A man with a wide brimmed hat with soulless eyes opens the passenger door for you and asks: 'Need a ride, boy?'.",
         ch1: "I'll hop in. Thanks for the help!", ch1Dest: 2,
         ch2: "Better ask him if he's a murderer first.", ch2Dest: 1
     ),
+     //1
     Story(
         st: "He nods slowly, unfazed by the question.",
         ch1: "At least he's honest. I'll climb in.", ch1Dest: 2,
         ch2: "Wait, I know how to change a tire.", ch2Dest: 3
     ),
+    //2
     Story(
         st: "As you begin to drive, the stranger starts talking about his relationship with his mother. He gets angrier and angrier by the minute. He asks you to open the glovebox. Inside you find a bloody knife, two severed fingers, and a cassette tape of Elton John. He reaches for the glove box.",
         ch1: "I love Elton John! Hand him the cassette tape.", ch1Dest: 5,
         ch2: "It's him or me! You take the knife and stab him.", ch2Dest: 4
     ),
+    //3
     Story(
-        st: "What? Such a cop out! Did you know traffic accidents are the second leading cause of accidental death for most adult age groups?",
+        st: "What? Such a cop-out! Did you know traffic accidents are the second leading cause of accidental death for most adult age groups?",
         ch1: "The", ch1Dest: 0,
         ch2: "End", ch2Dest: 0
     ),
+    //4
     Story(
         st: "As you smash through the guardrail and careen towards the jagged rocks below you reflect on the dubious wisdom of stabbing someone while they are driving a car you are in.",
         ch1: "The", ch1Dest: 0,
         ch2: "End", ch2Dest: 0
     ),
+    //5
     Story(
         st: "You bond with the murderer while crooning verses of 'Can you feel the love tonight'. He drops you off at the next town. Before you go he asks you if you know any good places to dump bodies. You reply: 'Try the pier.'",
         ch1: "The", ch1Dest: 0,
@@ -56,22 +61,21 @@ struct StoryBrain {
 //        return storey[storyNumber].choice
 //    }
     
-    mutating func getChoice1() -> [String] {
-          storyNumber = story[storyNumber].destination1
-        return [story[storyNumber].choice1]
+    mutating func getChoice1() -> String {
+        return story[storyNumber].choice1
     }
     
-    mutating func getChoice2() -> [String] {
-          storyNumber = story[storyNumber].destination2
-        return [story[storyNumber].choice2]
+    mutating func getChoice2() -> String {
+        return story[storyNumber].choice2
     }
 
     mutating func nextStory(userChoice: String)  {
-        if userChoice == "Take a left." {storyNumber = 1} //Проверяем на каком перекрёстке находится stirey. Если на первом, и выбран путь налево, то переходим к следующей записи в storey, если направо, то через одну запись и на следующих перекрестках остаёмся на них же.
-        else if userChoice == "Shout for help." ||
-         userChoice == "Play dead." {storyNumber = 1}
-            else {storyNumber = 2}
+        let currentStory = story[storyNumber]
+        if userChoice == currentStory.choice1 {
+            storyNumber = currentStory.destination1
+        } else if userChoice == currentStory.choice2 {
+            storyNumber = currentStory.destination2
+        }
     }
-    
 
 }
